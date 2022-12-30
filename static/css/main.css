@@ -1,0 +1,51 @@
+body {
+ background-color: black;
+}
+.container { 
+background: white;
+    color: rgb(9, 10, 10);
+  
+    
+}
+
+.name {
+    background: black;
+    
+    color:white;
+   
+
+    padding-left: 10ex;
+}
+
+.usn {
+    background: black;
+    margin-left: 0.5ex;
+    color:white;
+    padding-left: 10ex;
+}
+
+
+.email {
+    background: black;
+    margin-left: 0.5ex;
+    color:white;
+    padding-left: 10ex;
+}
+
+.submit {
+    background: white;
+    color: black;
+    margin-top: 2ex;
+    margin-left: 0.5ex;
+
+}
+.tb {
+
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+th,td {
+
+    padding: 10px;
+}
