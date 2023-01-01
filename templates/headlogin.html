@@ -1,0 +1,48 @@
+ht<!DOCTYPE html>
+<html lang="en">
+<head>
+
+     <link rel="stylesheet" href="static/css/login.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   
+
+    
+
+    <div class="sidenav">
+             <div class="login-main-text">
+                <h2>Application<br> Head_Login Page</h2>
+                <p>Login or register from here to access.</p>
+             </div>
+          </div>
+          <div class="main">
+             <div class="col-md-6 col-sm-12">
+                <div class="login-form">
+                   <form  method="POST">
+                      <div class="form-group">
+                         <label>User Name</label>
+                         {{ form.hidden_tag() }}
+                         {{form.h_name}}
+                      <div class="form-group">
+                         <label>Password</label>
+                         {{form.h_password}}
+                      </div>
+                      {{form.submit}}
+
+                     <button type="submit" class="btn btn-secondary" > <a href="{{url_for('headregister')}}"> Register </a></button>
+                   </form>
+                </div>
+             </div>
+          </div>
+
+
+    
+</body>
+</html>
