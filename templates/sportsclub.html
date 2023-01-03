@@ -23,11 +23,13 @@
         <th>EVENT</th>
         <th>DATE</th>
         <th>CLUB</th>
+        <th>Register</th>
       </tr>
       <tr>
         <td>{{i.event_name}}</td>
         <td>{{i.date_created}}</td>
         <td>{{i.club_name}}</td>
+        <td><a href="{{url_for('participant',event_name=i.event_name)}}">Register</a></td>
       </tr>
     </table>
     
@@ -37,5 +39,6 @@
     
     
     {% endfor %}
+
 </body>
 </html>

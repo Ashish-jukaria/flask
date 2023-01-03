@@ -20,7 +20,7 @@
 <!------ Include the above in your HEAD tag ---------->
 
 <nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">{{stu_name}}</a>
+  <a class="navbar-brand" href="#">{{h_name}}</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -59,10 +59,12 @@
 
 
 <br>
-<a href="">UPDATE EVENT</a>
 <br>
-<a href="">DELETE EVENT</a>
 
+<a href="{{url_for('participant_info')}}">PARTICIPANT</a>
+<br>
+
+<br>
 
 
 <h1>EVENTS</h1>
@@ -75,15 +77,28 @@
     <th>EVENT</th>
     <th>DATE</th>
     <th>CLUB</th>
+    <th>UPDATE</th>
+    <th>DELETE</th>
+   
   </tr>
   <tr>
-    <td>{{i.event_name}}</td>
-    <td>{{i.date_created}}</td>
-    <td>{{i.club_name}}</td>
+    <td>{{i.event_name}}</td>&nbsp;
+    <td>{{i.date_created}}</td>&nbsp;
+    <td>{{i.club_name}}</td>&nbsp;
+    <td>  <a href="{{url_for('update',id=i.id)}}">UPDATE EVENT</a>
+    </td>
+    <td>  <a href="{{url_for('delete',id=i.id)}}">DELETE EVENT</a>
+
+    </td>
   </tr>
+  
+
+  
+
+ 
 </table>
 
-
+<br>
 
 
 

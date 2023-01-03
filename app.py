@@ -1,4 +1,4 @@
-from flask import Flask ,render_template,redirect,url_for,session
+from flask import Flask ,render_template,redirect,url_for,session 
 from flask_sqlalchemy import SQLAlchemy,request
 from datetime import datetime
 from flask_migrate import Migrate
@@ -43,7 +43,7 @@ class Friends(db.Model):
     name=db.Column(db.String(50),nullable=False)
     date_created=db.Column(db.DateTime,default=datetime.utcnow)
     usn=db.Column(db.String(30))
-    email=db.Column(db.String(30))
+    email=db.Column(db.String(30))  
 
 
     def __repr__(self):
@@ -120,6 +120,9 @@ def myform():
 @app.route('/dashboard', methods=['GET','POST'] )
 def dashboard(): 
     stu_name=session['stu_name']
+
+  
+
     return render_template('dashboard.html',stu_name=stu_name)
 
 
@@ -162,6 +165,9 @@ def logout():
     logout_user
     return redirect(url_for('login'))
 
+
+
+#sports club
 @login_required
 @app.route('/sportsclub')
 def sportsclub():
@@ -247,9 +253,9 @@ def headlogout():
     logout_user
     return redirect(url_for('headlogin'))
 
-
+@login_required
 @app.route('/headdashboard', methods=['GET','POST'] )
-def headdashboard(): 
+def headdashboard():
     event_info=Event.query
     h_name=session['h_name']
     return render_template('headdashboard.html',h_name=h_name,event_info=event_info)
@@ -274,7 +280,7 @@ class Event(db.Model,UserMixin):
 
 
 class EventForm(FlaskForm):
-    event_name=StringField(validators=[InputRequired(),Length(min=4,max=20)],render_kw={"placeholder":"Username"})
+    event_name=StringField(validators=[InputRequired(),Length(min=4,max=20)],render_kw={"placeholder":"eventname"})
     date_created=StringField(validators=[InputRequired(),Length(min=4,max=20)],render_kw={"placeholder":"Date"})
     club_name=StringField(validators=[InputRequired(),Length(min=1,max=20)],render_kw={"placeholder":"Club"})
     event_id=StringField(validators=[InputRequired(),Length(min=1,max=20)],render_kw={"placeholder":"id"})
@@ -297,6 +303,86 @@ def eventform():
         return  redirect(url_for('headdashboard'))
 
     return render_template('eventform.html',form=form)
+
+@login_required
+@app.route('/update/<int:id>',methods = ['GET','POST'])
+def update(id):
+    form=EventForm()
+    eve_id=Event.query.get_or_404(id)
+    if request.method=="POST":
+        if eve_id:
+            db.session.delete(eve_id)
+            db.session.commit()
+     
+              
+            new_event=Event(event_name=form.event_name.data, date_created=form.date_created.data,club_name=form.club_name.data,event_id=form.event_id.data)
+
+            db.session.add(new_event)
+            db.session.commit()
+            return redirect(url_for('headdashboard'))
+
+    return render_template('update.html',eve_id=eve_id,form=form)
+
+
+@login_required
+@app.route('/delete/<int:id>',methods = ['GET','POST'])
+def delete(id):
+    eve_id=Event.query.get_or_404(id)
+    if request.method=="POST":
+        if eve_id:
+            db.session.delete(eve_id)
+            db.session.commit()
+     
+              
+            
+            return redirect(url_for('headdashboard'))
+
+    return render_template('delete.html',eve_id=eve_id)
+
+
+
+#participant
+
+class Participant(db.Model,UserMixin):
+    id=db.Column(db.Integer,primary_key=True)
+    email=db.Column(db.String(50),nullable=False ,unique=True)
+    participant_name=db.Column(db.String(50),nullable=False ,unique=True)
+    date_created=db.Column(db.String(100))
+    event_name=db.Column(db.String(100),nullable=False)
+    club_name=db.Column(db.String(100),nullable=False)
+
+    def __repr__(self):
+        return '<Name %r>' % self.id
+
+  
+
+@login_required
+@app.route('/participant/<string:event_name>',methods=['GET','POST'])
+def participant(event_name):
+    
+    eve_name=Event.query.filter(Event.event_name==event_name).first()
+    if request.method=="POST":
+        event_name=request.form['event_name']
+        date_created=request.form['date_created']
+        club_name=request.form['club_name']
+        email_id=request.form['email_id']
+        participant_name=request.form['participant_name']
+        new_participant=Participant(event_name=event_name, date_created=date_created,club_name=club_name,email=email_id,participant_name=participant_name)
+        db.session.add(new_participant)
+        db.session.commit()
+        return  redirect(url_for('sportsclub'))
+
+    return render_template('par_register.html',eve_name=eve_name)
+
+@login_required
+@app.route('/participant_info',methods=['GET','POST'])
+def participant_info():
+    info=Participant.query
+    return render_template("participant_info.html",info=info)
+
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
