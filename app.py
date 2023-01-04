@@ -95,24 +95,6 @@ def home():
     return render_template('index.html')
 
 
-#form
-@app.route('/form',methods=['POST','GET'])
-def myform():
-    if request.method=="POST":
-        x_name=request.form['name']
-        x_email=request.form['email']
-        x_usn=request.form['usn']
-        f_name=Friends(name=x_name,usn=x_usn,email=x_email)
-        #push to db
-        try:
-            db.session.add(f_name)
-            db.session.commit()
-            return redirect('/')
-        except:
-            return 'eroorrrr'
-    else:
-        fk=Friends.query.order_by(Friends.date_created).all()
-        return render_template("form.html",fk=fk)
 
 
 
@@ -120,10 +102,13 @@ def myform():
 @app.route('/dashboard', methods=['GET','POST'] )
 def dashboard(): 
     stu_name=session['stu_name']
+    result=Result.query.limit(5)
+   
+    
 
-  
+        
 
-    return render_template('dashboard.html',stu_name=stu_name)
+    return render_template('dashboard.html',stu_name=stu_name,result=result)
 
 
 
@@ -176,7 +161,8 @@ def sportsclub():
     for i in event_info:
         if i.club_name=='Sports':
             list.append(i)
-
+    
+        
     return render_template('sportsclub.html',list=list)
 
 
@@ -345,8 +331,8 @@ def delete(id):
 
 class Participant(db.Model,UserMixin):
     id=db.Column(db.Integer,primary_key=True)
-    email=db.Column(db.String(50),nullable=False ,unique=True)
-    participant_name=db.Column(db.String(50),nullable=False ,unique=True)
+    email=db.Column(db.String(50),nullable=False)
+    participant_name=db.Column(db.String(50),nullable=False)
     date_created=db.Column(db.String(100))
     event_name=db.Column(db.String(100),nullable=False)
     club_name=db.Column(db.String(100),nullable=False)
@@ -381,8 +367,79 @@ def participant_info():
     return render_template("participant_info.html",info=info)
 
 
+#club
+
+class Club(db.Model,UserMixin):
+    id=db.Column(db.Integer,primary_key=True)
+    email=db.Column(db.String(50),nullable=False ,unique=True)
+    user_name=db.Column(db.String(50),nullable=False ,unique=True)
+    date_joined=db.Column(db.String(100))
+    club_name=db.Column(db.String(100),nullable=False)
+
+    def __repr__(self):
+        return '<Name %r>' % self.id
 
 
+
+@login_required
+@app.route('/join_a_club/<string:username>',methods=['GET','POST'])
+def join_a_club(username):
+    username=Student.query.filter(Student.stu_name==username).first()
+    if request.method=="POST":
+        user_name=request.form['user_name']
+        date_joined=request.form['date_joined']
+        club_name=request.form['club_name']
+        email_id=request.form['email_id']
+        new_member=Club(user_name=user_name, date_joined=date_joined,club_name=club_name,email=email_id)
+        db.session.add(new_member)
+        db.session.commit()
+        return  redirect(url_for('dashboard'))
+    return render_template('join_a_club.html',username=username)
+
+
+
+
+@login_required
+@app.route('/user_info/<string:name>')
+def user_info(name):
+    event=Participant.query.filter(Participant.participant_name==name).all()
+    info=Club.query.filter(Club.user_name==name).first()
+    return render_template('user_info.html',info=info,event=event)
+
+
+#result
+
+class Result(db.Model,UserMixin):
+    id=db.Column(db.Integer,primary_key=True)
+    rank_one_name=db.Column(db.String(50),nullable=False )
+    rank_two_name=db.Column(db.String(50),nullable=False )
+    rank_three_name=db.Column(db.String(50),nullable=False )
+    event_name=db.Column(db.String(50),nullable=False )
+
+    def __repr__(self):
+        return '<Name %r>' % self.id
+
+
+@login_required
+@app.route('/result/<int:id>',methods=['GET','POST'])
+def result(id):
+    name=Event.query.filter(Event.id==id).first()
+    if request.method=="POST":
+        rank_one_name= request.form['rank_one_name']
+        rank_two_name= request.form['rank_two_name']
+        rank_three_name= request.form['rank_three_name']
+        event_name=request.form['event_name']
+        ranking=Result(rank_one_name=rank_one_name,rank_two_name=rank_two_name,rank_three_name=rank_three_name,event_name=event_name)
+        db.session.add(ranking)
+        db.session.commit()
+        return redirect(url_for('headdashboard'))
+    return render_template('result.html',name=name)
+
+
+
+
+
+#run
 
 if __name__ == '__main__':
     app.run(debug=True)

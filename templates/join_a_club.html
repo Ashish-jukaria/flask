@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="{{url_for('join_a_club',username=username.stu_name)}}" method="POST">
+
+     <input value="{{username.stu_name}}" readonly="readonly"  type="text" id="form3Example1c" class="form-control" name="user_name" />
+
+
+     <label for="cars">Choose a club:</label>
+     <select name="club_name" id="club_name" >
+       <option value="Sports">Sports</option>
+       <option value="Dance">Dance</option>
+       <option value="IT">IT</option>
+       <option value="Music">Music</option>
+     </select>
+
+     <input placeholder="date" type="date" id="form3Example1c" class="form-control" name="date_joined"/>
+
+
+     <input name="email_id" placeholder="email" type="text" id="form3Example1c" class="form-control" />
+
+
+     <input type="submit" name="submit" value="submit">
+
+    </form>
+</body>
+</html>

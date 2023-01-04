@@ -66,7 +66,6 @@
 
 <br>
 
-
 <h1>EVENTS</h1>
 
 {% for i in event_info %}
@@ -79,6 +78,7 @@
     <th>CLUB</th>
     <th>UPDATE</th>
     <th>DELETE</th>
+    <th>Result</th>
    
   </tr>
   <tr>
@@ -88,8 +88,9 @@
     <td>  <a href="{{url_for('update',id=i.id)}}">UPDATE EVENT</a>
     </td>
     <td>  <a href="{{url_for('delete',id=i.id)}}">DELETE EVENT</a>
-
+     
     </td>
+    <td><a href="{{url_for('result',id=i.id)}}">Result</a></td>
   </tr>
   
 

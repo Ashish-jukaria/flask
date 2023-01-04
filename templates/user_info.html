@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>NAME</h1>
+    {{info.user_name}}
+    <br>
+    <h1>CLUB</h1>
+    {{info.club_name}}
+    <br>
+    <h1>EMAIL</h1>
+    {{info.email}}
+    <br>
+    <h1>DATE JOINED</h1>
+    {{info.date_joined}}
+    <br>
+    <h1>EVENT PARTICIPATED</h1>
+
+    {% for i in event %}
+    {{i.event_name}}
+    <br>
+
+    {% endfor %}
+
+    
+    
+</body>
+</html>
