@@ -6,26 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
+
+<body style="background-color: cyan
+;">
+  
+  <h1>JOin a Club</h1>
     <form action="{{url_for('join_a_club',username=username.stu_name)}}" method="POST">
 
      <input value="{{username.stu_name}}" readonly="readonly"  type="text" id="form3Example1c" class="form-control" name="user_name" />
 
-
+<br>
+<br>
      <label for="cars">Choose a club:</label>
      <select name="club_name" id="club_name" >
        <option value="Sports">Sports</option>
        <option value="Dance">Dance</option>
-       <option value="IT">IT</option>
+       <option value="IT">Tech</option>
        <option value="Music">Music</option>
      </select>
-
+<br>
+<br>
      <input placeholder="date" type="date" id="form3Example1c" class="form-control" name="date_joined"/>
 
-
+<br>
+<br>
      <input name="email_id" placeholder="email" type="text" id="form3Example1c" class="form-control" />
 
-
+<br>
+<br>
      <input type="submit" name="submit" value="submit">
 
     </form>

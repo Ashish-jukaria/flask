@@ -39,59 +39,45 @@
     <ul class="navbar-nav ">
       <li class="nav-item">
         <a class="nav-link" href="{{url_for('headlogout')}}">
-          <i class="fa fa-bell">
-            <span class="badge badge-info">11</span>
+          <i class="lg">
+            <span class="badge badge-info">logout</span>
           </i>
           Logout
         </a>
       </li>
      
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+    <ul class="navbar-nav ">
+      <li class="nav-item">
+        <a class="nav-link" href="{{url_for('participant_info')}}">
+          <i class="LG">
+            <span class="badge badge-info">participant</span>
+          </i>
+          PARTICIPANT
+        </a>
+      </li>
+     
+    </ul>
+
+    <ul class="navbar-nav ">
+      <li class="nav-item">
+        <a class="nav-link" href="{{url_for('eventform')}}">
+          <i class="eve">
+            <span class="badge badge-info">event</span>
+          </i>
+          ADD EVENT
+        </a>
+      </li>
+     
+    </ul>
+  
   </div>
 </nav>
 
 
-  <a href="{{url_for('eventform')}}">ADD EVENT</a>
 
 
-<br>
-<br>
 
-<a href="{{url_for('participant_info')}}">PARTICIPANT</a>
-<br>
-
-<br>
-
-<h1>EVENTS</h1>
-
-{% for i in event_info %}
-
-
-<table>
-  <tr>
-    <th>EVENT</th>
-    <th>DATE</th>
-    <th>CLUB</th>
-    <th>UPDATE</th>
-    <th>DELETE</th>
-    <th>Result</th>
-   
-  </tr>
-  <tr>
-    <td>{{i.event_name}}</td>&nbsp;
-    <td>{{i.date_created}}</td>&nbsp;
-    <td>{{i.club_name}}</td>&nbsp;
-    <td>  <a href="{{url_for('update',id=i.id)}}">UPDATE EVENT</a>
-    </td>
-    <td>  <a href="{{url_for('delete',id=i.id)}}">DELETE EVENT</a>
-     
-    </td>
-    <td><a href="{{url_for('result',id=i.id)}}">Result</a></td>
-  </tr>
   
 
   
@@ -100,11 +86,39 @@
 </table>
 
 <br>
+<h1>EVENTS</h1>
+{% for i in event_info %}
+<table class="table table-dark">
+    <thead>
+       
+      <tr>
+        <th>EVENT</th>
+        <th>DATE</th>
+        <th>CLUB</th>
+        <th>UPDATE</th>
+        <th>DELETE</th>
+        <th>Result</th>
+       
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">{{i.event_name}}</th>
+    <td>{{i.date_created}}</td>&nbsp;
+    <td>{{i.club_name}}</td>&nbsp;
+    <td>  <a href="{{url_for('update',id=i.id)}}">UPDATE EVENT</a>
+    </td>
+    <td>  <a href="{{url_for('delete',id=i.id)}}">DELETE EVENT</a>
+     
+    </td>
+    <td><a href="{{url_for('result',id=i.id)}}">Result</a></td>
+      </tr>
+    
+  </table>
+{% endfor %}   
 
 
 
-
-{% endfor %}
 
 
 

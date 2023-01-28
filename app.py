@@ -38,20 +38,6 @@ with app.app_context():
     db.create_all()
 
 
-class Friends(db.Model):
-    id=db.Column(db.Integer,primary_key=True)
-    name=db.Column(db.String(50),nullable=False)
-    date_created=db.Column(db.DateTime,default=datetime.utcnow)
-    usn=db.Column(db.String(30))
-    email=db.Column(db.String(30))  
-
-
-    def __repr__(self):
-        return '<Name %r>' % self.id
-
-        
-
-
 
 class Student(db.Model,UserMixin):
     id=db.Column(db.Integer,primary_key=True)
@@ -103,13 +89,13 @@ def home():
 def dashboard(): 
     stu_name=session['stu_name']
     result=Result.query.limit(5)
-   
-    
-
-        
-
     return render_template('dashboard.html',stu_name=stu_name,result=result)
 
+
+@app.route('/results')
+def resultevent():
+        result=Result.query.limit(5)
+        return render_template('resultview.html',result=result)
 
 
 
@@ -164,7 +150,45 @@ def sportsclub():
     
         
     return render_template('sportsclub.html',list=list)
+#dance club
 
+
+@login_required
+@app.route('/danceclub')
+def danceclub():
+    event_info=Event.query
+    list=[]
+    for i in event_info:
+        if i.club_name=='Dance':
+            list.append(i)
+    
+        
+    return render_template('danceclub.html',list=list)
+#ML club
+@login_required
+@app.route('/techclub')
+def techclub():
+    event_info=Event.query
+    list=[]
+    for i in event_info:
+        if i.club_name=='Tech':
+            list.append(i)
+    
+        
+    return render_template('Mlclub.html',list=list)
+
+#music club
+@login_required
+@app.route('/musicclub')
+def musicclub():
+    event_info=Event.query
+    list=[]
+    for i in event_info:
+        if i.club_name=='Music':
+            list.append(i)
+    
+        
+    return render_template('musicclub.html',list=list)
 
 #head 
 
@@ -257,7 +281,6 @@ class Event(db.Model,UserMixin):
     id=db.Column(db.Integer,primary_key=True)
     event_name=db.Column(db.String(50),nullable=False ,unique=True)
     date_created=db.Column(db.String(100))
-    event_id=db.Column(db.String(100),nullable=False)
     club_name=db.Column(db.String(100),nullable=False)
 
     def __repr__(self):
@@ -269,7 +292,6 @@ class EventForm(FlaskForm):
     event_name=StringField(validators=[InputRequired(),Length(min=4,max=20)],render_kw={"placeholder":"eventname"})
     date_created=StringField(validators=[InputRequired(),Length(min=4,max=20)],render_kw={"placeholder":"Date"})
     club_name=StringField(validators=[InputRequired(),Length(min=1,max=20)],render_kw={"placeholder":"Club"})
-    event_id=StringField(validators=[InputRequired(),Length(min=1,max=20)],render_kw={"placeholder":"id"})
     submit=SubmitField("Submit")
     
     def validate_event(self,event_name):
@@ -283,7 +305,7 @@ class EventForm(FlaskForm):
 def eventform():
     form=EventForm()
     if form.validate_on_submit() or  request.method=="POST":
-        new_event=Event(event_name=form.event_name.data, date_created=form.date_created.data,club_name=form.club_name.data,event_id=form.event_id.data)
+        new_event=Event(event_name=form.event_name.data, date_created=form.date_created.data,club_name=form.club_name.data)
         db.session.add(new_event)
         db.session.commit()
         return  redirect(url_for('headdashboard'))

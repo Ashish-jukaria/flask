@@ -5,27 +5,42 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
 </head>
 <body>
-    <h1>NAME</h1>
-    {{info.user_name}}
-    <br>
-    <h1>CLUB</h1>
-    {{info.club_name}}
-    <br>
-    <h1>EMAIL</h1>
-    {{info.email}}
-    <br>
-    <h1>DATE JOINED</h1>
-    {{info.date_joined}}
-    <br>
-    <h1>EVENT PARTICIPATED</h1>
+   
 
-    {% for i in event %}
-    {{i.event_name}}
-    <br>
 
-    {% endfor %}
+
+    <h1>User Info</h1>
+   
+    <table class="table table-dark">
+        <thead>
+           
+          <tr>
+            <th scope="col"> Name</th>
+            <th scope="col">Club</th>
+            <th scope="col">Email</th>
+            <th scope="col">Date Joined</th>
+            <th scope="col">Event particpated</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row"> {{info.user_name}}</th>
+            <td> {{info.club_name}}</td>
+            <td> {{info.email}}</td>
+            <td>{{info.date_joined}}</td>
+            <td> {% for i in event %}
+                {{i.event_name}}
+               <br>
+                {% endfor %}  </td>
+          </tr>
+        
+      </table>
+  
 
     
     
