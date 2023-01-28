@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dashboard</title>
+    <link rel="stylesheet" href="../static/css/navbar.css">
+</head>
+<body>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="{{url_for('user_info',name=stu_name)}}">{{stu_name}}</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{{url_for('dashboard')}}">
+          <i class="fa fa-home"></i>
+          Home
+          <span class="sr-only">(current)</span>
+          </a>
+      </li>
+       
+    </ul>
+    <ul class="navbar-nav ">
+      <li class="nav-item">
+        <a class="nav-link" href="{{url_for('logout')}}">
+          <i class="logout">
+            <span class="badge badge-info">logout</span>
+          </i>
+          Logout
+        </a>
+      </li>
+     
+    </ul> <ul class="navbar-nav ">
+      <li class="nav-item">
+        <a class="nav-link" href="{{url_for('join_a_club',username=stu_name)}}">
+          <i class="Club">
+            <span class="badge badge-info">join a club</span>
+          </i>
+          Join_a_club
+        </a>
+      </li>
+     
+    </ul>
+    <ul class="navbar-nav ">
+      <li class="nav-item">
+        <a class="nav-link" href="{{url_for('resultevent')}}">
+          <i class="result">
+            <span class="badge badge-info">know your result</span>
+          </i>
+          Results
+        </a>
+      </li>
+     
+    </ul>
+     
+
+
+  </div>
+</nav>
+
+
+    <h1>Welcome to Music cluB</h1>
+
+    <h1>EVENTS</h1>
+    {% for i in list %}
+    <table class="table table-dark">
+      <thead>
+         
+        <tr>
+          <th>EVENT</th>
+          <th>DATE</th>
+          <th>CLUB</th>
+          <th>Register</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{i.event_name}}</td>
+          <td>{{i.date_created}}</td>
+          <td>{{i.club_name}}</td>
+          <td><a href="{{url_for('participant',event_name=i.event_name)}}">Register</a></td>
+      
+    </table>
+  {% endfor %}   
+
+    
+    
+    
+    
+
+
+</body>
+</html>

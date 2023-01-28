@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+    <title>Document</title>
+</head>
+<body>
+    <h1>Results</h1>
+    {% for i in result %}
+    <table class="table table-dark">
+        <thead>
+           
+          <tr>
+            <th scope="col"> Event</th>
+            <th scope="col">First</th>
+            <th scope="col">Second</th>
+            <th scope="col">Third</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">{{i.event_name}}</th>
+            <td>  {{i.rank_one_name}}</td>
+            <td> {{i.rank_two_name}}</td>
+            <td>{{i.rank_three_name}}</td>
+          </tr>
+        
+      </table>
+    {% endfor %}   
+</body>
+</html>

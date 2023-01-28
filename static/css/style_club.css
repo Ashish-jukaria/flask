@@ -1,0 +1,315 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Josefin Sans', sans-serif;
+    box-sizing: border-box;
+
+}
+body{
+    background-color: black;
+    display: grid;
+	place-items: center;
+}
+.action{
+    position: fixed;
+    top: 180px;
+    left: 22px;
+}
+.action .profile{
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+}
+.action .profile img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.action .menu{
+    position: absolute;
+    top: 75px;
+    right: -133px;
+    padding: 10px 20px;
+    background: red;
+    width: 200px;
+    box-sizing: 0 5px 25px rgba(0,0,0,0.1);
+    border-radius: 15px;
+    transition: 0.5s;
+    visibility: hidden;
+    opacity: 0;
+}
+.action .menu.active{
+    top: 80px;
+    visibility: visible;
+    opacity: 1;
+}
+.action .menu::before{
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 28px;
+    width: 20px;
+    height: 20px;
+    background: red;
+    transform: rotate(45deg);
+}
+.action .menu ul li{
+    list-style: none;
+    padding: 10px 0;
+    border-top: 1px solid rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+}  
+.action .menu ul li img{
+    max-width: 40px;
+    margin-right: 25px;
+    opacity: 100%;
+    transition: 0.5s;
+} 
+.action .menu ul li:hover img{
+    opacity: 1;
+}
+.action .menu ul li a{
+    display: inline-block;
+    text-decoration: none;
+    color: black;
+    font-weight: 700;
+    transition: 0.5s;
+}
+.action .menu ul li:hover a{
+    transform: scale(1.2);
+    color: rgba(0, 255, 255, 0.79);
+}
+.action .menu h3{
+    width: 100%;
+    text-align: center;
+    font-size: 22px;
+    padding: 20px 0;
+    font-weight: 800;
+    color: black;
+    line-height: 1.2em;
+}
+.action .menu h3 Span1{
+    font-size: 16px;
+    color: #106746;
+    font-weight: 800;
+}
+.hero{
+    height: 20vh;
+    width: 100%;
+    background-image: url(dark_back.jpg);
+    background-size: cover;
+    background-position: center;
+}
+.btn{
+	background-color:#f9004d;
+	color: white;
+	text-decoration: none;
+	border: 2px solid transparent;
+	font-weight: bold;
+	padding: 10px 20px;
+	border-radius: 40px;
+	transition: transform .4s; 
+}
+.btn:hover{
+	transform: scale(1.2);
+}
+.content{
+	position: absolute;
+	top: 50%;
+	left:8%;
+	transform: translateY(-50%);
+    height: 300px;
+}
+nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 50px;
+    padding-left: 2%;
+    padding-right: 400px;
+}
+.logo{
+    color: white;
+	font-size: 45px;
+	letter-spacing: 1px;
+	cursor: pointer;
+}
+span{
+    color: #f9004d;
+}
+nav ul li{
+	list-style-type: none;
+	display: inline-block;
+	padding: 10px  25px;
+}
+nav ul li a{
+	color: white;
+	text-decoration: none;
+	font-weight: bold;
+	text-transform: capitalize;
+}
+nav ul li a:hover{
+	color: #f9004d;
+	transition: .4s;
+}
+.main{
+    background-color: black;
+}
+.container{
+    position: relative;
+    width: 1200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 5px;
+}
+.container .card{
+    position: relative;
+    max-width: 350px;
+    height: 215px;
+    background: rgb(24, 194, 213);
+    margin: 90px 90px;
+    padding: 2px -40px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 5px 200px rgba(0,0,0,0.5);
+    transition: 0.3s ease-in-out;
+}
+.container .card:hover{
+    height: 520px;
+}
+.container .card .imgBx{
+    position: relative;
+    width: 310px;
+    height: 260px;
+    top: -60px;
+    left: 20px;
+    z-index: 1;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+}
+.container .card .imgBx img{
+    max-width: 100%;
+    border-radius: 4px;
+}
+.container .card .content{
+    position: relative;
+    margin-top: -130px;
+    padding: -4px 10px;
+    text-align: center;
+    left: 2px;;
+    color: #111;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.3s ease-in-out;
+}
+.container .card:hover .content{
+    visibility: visible;
+    opacity: 1;
+    margin-top: -95px;
+    transition-delay: 0.3s;
+}
+.container a{
+    position: relative;
+    bottom: -40px;
+    background: #fff;
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 1.1em;
+    letter-spacing: 0.1em;
+    font-weight: 400;
+    padding: 10px 30px;
+    transition: 0.5s;
+}
+.container a:hover{
+    background: var(--clr);
+    color: var(--clr);
+    letter-spacing: 0.25em;
+    box-shadow: 0 0 35px var(--clr);
+}
+.container a:before{
+    content: '';
+    position: absolute;
+    inset: 2px; 
+    background: #27282c; 
+}
+.container a span{
+    position: relative;
+    z-index: 1;    
+}
+.container a i {
+    position: absolute;
+    inset: 0;
+    display: block;
+}
+.container a i::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 80%;
+    width: 10px;
+    height: 4px;
+    background: #27282c;
+    transform: translateX(-50%)skew(325deg);
+    transition: 0.5s;
+}
+.container a:hover i::before{
+    width: 20px;
+    left: 20%;
+}
+.container a i::after{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 20%;
+    width: 10px;
+    height: 4px;
+    background: #27282c;
+    transform: translateX(-50%)skew(325deg);
+    transition: 0.5s;
+}
+.container a:hover i::after{
+    width: 20px;
+    left: 80%;
+}
+
+#top-students-container {
+    width: 250px;
+    height: 950px;
+    background-color: #5551d2;
+    padding: 10px;
+    position: absolute;
+    right: 1px;
+  }
+#top-students-container h1{
+    text-align: center;
+    line-height: 2em;
+}
+  
+  #top-students-container h2 {
+    text-align: center;
+    line-height: 2em;
+  }
+  
+  #top-students-container ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  #top-students-container li {
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+  }
+  
+  #top-students-container li:last-child {
+    border-bottom: none;
+  }
+  
