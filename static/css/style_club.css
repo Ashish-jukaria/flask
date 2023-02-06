@@ -181,7 +181,7 @@ nav ul li a:hover{
     display: flex;
     flex-direction: column;
     box-shadow: 0 5px 200px rgba(0,0,0,0.5);
-    transition: 0.3s ease-in-out;
+    transition: 30s ease-in-out;
 }
 .container .card:hover{
     height: 520px;

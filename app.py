@@ -323,7 +323,7 @@ def update(id):
             db.session.commit()
      
               
-            new_event=Event(event_name=form.event_name.data, date_created=form.date_created.data,club_name=form.club_name.data,event_id=form.event_id.data)
+            new_event=Event(event_name=form.event_name.data, date_created=form.date_created.data,club_name=form.club_name.data)
 
             db.session.add(new_event)
             db.session.commit()
